@@ -1,0 +1,12 @@
+controller_list:
+  - name: fake_6dof_arm_controller
+    joints:
+      - a_joint_1
+      - a_joint_2
+      - a_joint_3
+      - b_joint_1
+      - b_joint_2
+      - b_joint_3
+initial:  # Define initial robot poses.
+#  - group: 6dof_arm
+#    pose: home

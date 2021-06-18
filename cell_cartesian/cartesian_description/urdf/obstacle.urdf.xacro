@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro" name="obstacle" >
+
+    <link name="obstacle_link">
+      <visual>
+        <geometry>
+          <sphere radius="0.25"/>
+        </geometry>
+      </visual>
+      <collision>
+        <origin rpy="0 0 0" xyz="0 0 0" />
+        <geometry>
+          <sphere radius="0.25"/>
+        </geometry>
+      </collision>
+    </link>
+
+</robot>

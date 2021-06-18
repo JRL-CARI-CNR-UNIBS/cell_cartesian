@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro" name="cartesian_cell" >
+
+<xacro:include filename="$(find cartesian_description)/urdf/cartesian_robot.urdf.xacro" />
+
+  <link name="world"/>
+
+  <joint name="world2cartesian" type="fixed">
+    <parent link="world"/>
+    <child link="link_Z"/>
+    <origin xyz="0 0 0.5"/>
+  </joint>
+
+</robot>

@@ -1,0 +1,9 @@
+controller_list:
+  - name: fake_cartesian_arm_controller
+    joints:
+      - from_Z_to_Y
+      - from_Y_to_fake
+      - from_fake_to_X
+initial:  # Define initial robot poses.
+  - group: cartesian_arm
+    pose: home_pose
