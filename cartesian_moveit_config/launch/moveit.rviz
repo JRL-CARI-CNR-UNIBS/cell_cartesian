@@ -4,12 +4,13 @@ Panels:
     Name: Displays
     Property Tree Widget:
       Expanded:
-        - /Global Options1
         - /MotionPlanning1
-        - /MotionPlanning1/Scene Geometry1
+        - /MotionPlanning1/Scene Robot1
         - /MotionPlanning1/Planning Request1
-      Splitter Ratio: 0.5588235259056091
-    Tree Height: 357
+        - /TF1
+        - /TF1/Frames1
+      Splitter Ratio: 0.5
+    Tree Height: 215
   - Class: rviz/Help
     Name: Help
   - Class: rviz/Views
@@ -17,8 +18,6 @@ Panels:
       - /Current View1
     Name: Views
     Splitter Ratio: 0.5
-  - Class: rviz_visual_tools/RvizVisualToolsGui
-    Name: RvizVisualToolsGui
 Preferences:
   PromptSaveOnExit: true
 Toolbars:
@@ -44,7 +43,7 @@ Visualization Manager:
       Plane Cell Count: 10
       Reference Frame: <Fixed Frame>
       Value: true
-    - Acceleration_Scaling_Factor: 1
+    - Acceleration_Scaling_Factor: 0.1
       Class: moveit_rviz_plugin/MotionPlanning
       Enabled: true
       Move Group Namespace: ""
@@ -55,7 +54,7 @@ Visualization Manager:
       MoveIt_Planning_Attempts: 10
       MoveIt_Planning_Time: 5
       MoveIt_Use_Cartesian_Path: false
-      MoveIt_Use_Constraint_Aware_IK: true
+      MoveIt_Use_Constraint_Aware_IK: false
       MoveIt_Workspace:
         Center:
           X: 0
@@ -95,11 +94,6 @@ Visualization Manager:
             Show Axes: false
             Show Trail: false
             Value: true
-          link_fake:
-            Alpha: 1
-            Show Axes: false
-            Show Trail: false
-            Value: true
           world:
             Alpha: 1
             Show Axes: false
@@ -128,17 +122,17 @@ Visualization Manager:
         Interactive Marker Size: 0
         Joint Violation Color: 255; 0; 255
         Planning Group: cartesian_arm
-        Query Goal State: false
+        Query Goal State: true
         Query Start State: false
         Show Workspace: false
-        Start State Alpha: 0.5
+        Start State Alpha: 1
         Start State Color: 0; 255; 0
       Planning Scene Topic: move_group/monitored_planning_scene
       Robot Description: robot_description
       Scene Geometry:
         Scene Alpha: 1
-        Scene Color: 255; 255; 255
-        Scene Display Time: 0.20000000298023224
+        Scene Color: 50; 230; 50
+        Scene Display Time: 0.009999999776482582
         Show Scene Geometry: true
         Voxel Coloring: Z-Axis
         Voxel Rendering: Occupied Voxels
@@ -170,11 +164,6 @@ Visualization Manager:
             Show Axes: false
             Show Trail: false
             Value: true
-          link_fake:
-            Alpha: 1
-            Show Axes: false
-            Show Trail: false
-            Value: true
           world:
             Alpha: 1
             Show Axes: false
@@ -183,18 +172,40 @@ Visualization Manager:
         Show Robot Collision: false
         Show Robot Visual: false
       Value: true
-      Velocity_Scaling_Factor: 1
-    - Class: rviz/Marker
+      Velocity_Scaling_Factor: 0.1
+    - Class: rviz/TF
       Enabled: true
-      Marker Topic: /marker_visualization_topic
-      Name: Marker
-      Namespaces:
-        pathplan: true
-      Queue Size: 100
+      Frame Timeout: 15
+      Frames:
+        All Enabled: false
+        end_effector:
+          Value: false
+        link_X:
+          Value: false
+        link_Y:
+          Value: false
+        link_Z:
+          Value: false
+        world:
+          Value: true
+      Marker Alpha: 1
+      Marker Scale: 1
+      Name: TF
+      Show Arrows: true
+      Show Axes: true
+      Show Names: true
+      Tree:
+        world:
+          link_X:
+            link_Y:
+              link_Z:
+                end_effector:
+                  {}
+      Update Interval: 0
       Value: true
   Enabled: true
   Global Options:
-    Background Color: 243; 243; 243
+    Background Color: 48; 48; 48
     Default Light: true
     Fixed Frame: world
     Frame Rate: 30
@@ -207,31 +218,31 @@ Visualization Manager:
   Value: true
   Views:
     Current:
-      Class: rviz/XYOrbit
-      Distance: 2.5753211975097656
+      Class: rviz/Orbit
+      Distance: 4.42136287689209
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
-      Field of View: 0.7853981852531433
+      Field of View: 0.75
       Focal Point:
-        X: 0.9334557056427002
-        Y: 0.2287704348564148
-        Z: 1.6391334156651283e-07
+        X: -0.10000000149011612
+        Y: 0.25
+        Z: 0.30000001192092896
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.5097962021827698
+      Pitch: 0.6049999594688416
       Target Frame: world
-      Yaw: 2.794950008392334
+      Yaw: 4.98494815826416
     Saved: ~
 Window Geometry:
   Displays:
     collapsed: false
-  Height: 1043
+  Height: 848
   Help:
     collapsed: false
   Hide Left Dock: false
@@ -240,11 +251,9 @@ Window Geometry:
     collapsed: false
   MotionPlanning - Trajectory Slider:
     collapsed: false
-  QMainWindow State: 000000ff00000000fd000000020000000000000164000003a7fc0200000007fb000000100044006900730070006c006100790073000000003d000003a7000000c900fffffffb0000000800480065006c00700000000342000000bb0000006e00fffffffb0000000a0056006900650077007300000003b0000000b0000000a400fffffffb0000000c00430061006d00650072006100000002ff000001610000000000000000fb0000001e004d006f00740069006f006e00200050006c0061006e006e0069006e00670100000374000001890000000000000000fb00000044004d006f00740069006f006e0050006c0061006e006e0069006e00670020002d0020005400720061006a006500630074006f0072007900200053006c00690064006500720000000000ffffffff0000001600000016fb0000001c004d006f00740069006f006e0050006c0061006e006e0069006e0067000000025b000001890000017d00ffffff000000020000078000000041fc0100000001fb00000024005200760069007a00560069007300750061006c0054006f006f006c00730047007500690100000000000007800000016400ffffff000007800000037200000001000000020000000100000002fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
-  RvizVisualToolsGui:
-    collapsed: false
+  QMainWindow State: 000000ff00000000fd0000000100000000000001f3000002f6fc0200000007fb000000100044006900730070006c006100790073010000003d00000168000000c900fffffffb0000000800480065006c00700000000342000000bb0000006e00fffffffb0000000a00560069006500770073000000010c000000a4000000a400fffffffb0000000c00430061006d00650072006100000002ff000001610000000000000000fb0000001e004d006f00740069006f006e00200050006c0061006e006e0069006e00670100000374000001890000000000000000fb00000044004d006f00740069006f006e0050006c0061006e006e0069006e00670020002d0020005400720061006a006500630074006f0072007900200053006c00690064006500720000000000ffffffff0000001600000016fb0000001c004d006f00740069006f006e0050006c0061006e006e0069006e006701000001ab000001880000017d00ffffff00000312000002f600000001000000020000000100000002fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
   Views:
     collapsed: false
-  Width: 1920
-  X: 1920
-  Y: 0
+  Width: 1291
+  X: 454
+  Y: 27

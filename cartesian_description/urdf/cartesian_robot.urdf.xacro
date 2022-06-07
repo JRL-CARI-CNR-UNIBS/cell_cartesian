@@ -2,102 +2,69 @@
 <robot xmlns:xacro="http://ros.org/wiki/xacro" name="cartesian_robot" >
 
   <material name="blue">
-    <color rgba="0 0 0.8 1"/>
+    <color rgba="0 0 1 0.5"/>
+  </material>
+  <material name="green">
+    <color rgba="0 1 0 0.5"/>
+  </material>
+  <material name="red">
+    <color rgba="1 0 0 0.5"/>
   </material>
   <material name="black">
     <color rgba="0 0 0 1"/>
   </material>
-  <material name="white">
-    <color rgba="1 1 1 1"/>
-  </material>
 
-  <link name="link_Z">
-    <visual>
-      <geometry>
-        <cylinder length="1" radius="0.05"/>
-      </geometry>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <material name="blue"/>
-    </visual>
-    <collision>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-        <sphere radius="0.0"/>
-      </geometry>
-    </collision>
-  </link>
+  <link name="link_Z"/>
+  <link name="link_Y"/>
+  <link name="link_X"/>
 
-  <link name="link_Y">
-    <visual>
-      <geometry>
-        <cylinder length="1" radius="0.05"/>
-      </geometry>
-      <origin rpy="1.570795 0 0" xyz="0 0 0"/>
-      <material name="black"/>
-    </visual>
-    <collision>
-      <origin rpy="1.570795 0 0" xyz="0 0 0"/>
-      <geometry>
-        <sphere radius="0.0"/>
-      </geometry>
-    </collision>
-  </link>
+  <!-- <link name="link_Z">
+  <visual>
+    <geometry>
+      <cylinder length="1" radius="0.05"/>
+    </geometry>
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+    <material name="blue"/>
+  </visual>
+  <collision>
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+    <geometry>
+      <sphere radius="0.0"/>
+    </geometry>
+  </collision>
+</link> -->
 
-  <joint name="from_Z_to_Y" type="prismatic">
-    <parent link="link_Z"/>
-    <child link="link_Y"/>
-    <axis xyz = "0 0 1" />
-    <origin rpy="0 0 0" xyz="0 0.5 -0.5"/>
-    <limit effort="1000.0" lower="0" upper="1" velocity="0.5"/>
-  </joint>
+<!-- <link name="link_Y">
+  <visual>
+    <geometry>
+      <cylinder length="1" radius="0.05"/>
+    </geometry>
+    <origin rpy="1.570795 0 0" xyz="0 0 0"/>
+    <material name="green"/>
+  </visual>
+  <collision>
+    <origin rpy="1.570795 0 0" xyz="0 0 0"/>
+    <geometry>
+      <sphere radius="0.0"/>
+    </geometry>
+  </collision>
+</link> -->
 
-  <link name="link_fake">
-    <visual>
-      <geometry>
-        <sphere radius="0.00005"/>
-      </geometry>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <material name="black"/>
-    </visual>
-    <collision>
-      <origin rpy="0.0 0.0 0.0" xyz="0 0 0"/>
-      <geometry>
-        <sphere radius="0.0"/>
-      </geometry>
-    </collision>
-  </link>
-
-  <joint name="from_Y_to_fake" type="prismatic">
-    <parent link="link_Y"/>
-    <child link="link_fake"/>
-    <axis xyz = "0 1 0" />
-    <origin rpy="0 0 0" xyz="0 -0.5 0"/>
-    <limit effort="1000.0" lower="0" upper="1" velocity="0.5"/>
-  </joint>
-
-  <link name="link_X">
-    <visual>
-      <geometry>
-        <cylinder length="1" radius="0.05"/>
-      </geometry>
-      <origin rpy="0 -1.570795 0" xyz="0 0 0"/>
-      <material name="white"/>
-    </visual>
-    <collision>
-      <origin rpy="0 -1.570795 0" xyz="0 0 0"/>
-      <geometry>
-        <sphere radius="0.0"/>
-      </geometry>
-    </collision>
-  </link>
-
-  <joint name="from_fake_to_X" type="prismatic">
-    <parent link="link_fake"/>
-    <child link="link_X"/>
-    <axis xyz = "1 0 0" />
-    <origin rpy="0 0 0" xyz="-0.5 0 0"/>
-    <limit effort="1000.0" lower="0" upper="1" velocity="0.5"/>
-  </joint>
+<!-- <link name="link_X">
+  <visual>
+    <geometry>
+      <cylinder length="1" radius="0.05"/>
+    </geometry>
+    <origin rpy="0 -1.570795 0" xyz="0 0 0"/>
+    <material name="red"/>
+  </visual>
+  <collision>
+    <origin rpy="0 -1.570795 0" xyz="0 0 0"/>
+    <geometry>
+      <sphere radius="0.0"/>
+    </geometry>
+  </collision>
+</link> -->
 
   <link name="end_effector">
     <visual>
@@ -115,10 +82,28 @@
     </collision>
   </link>
 
-  <joint name="from_X_to_end" type="fixed">
+  <joint name="joint_X" type="prismatic">
     <parent link="link_X"/>
+    <child link="link_Y"/>
+    <axis xyz = "1 0 0" />
+    <origin rpy="0 0 0" xyz="-0.5 0.5 0"/>
+    <limit effort="1000.0" lower="0" upper="1" velocity="0.5"/>
+  </joint>
+
+  <joint name="joint_Y" type="prismatic">
+    <parent link="link_Y"/>
+    <child link="link_Z"/>
+    <axis xyz = "0 1 0" />
+    <origin rpy="0 0 0" xyz="0 -0.5 0.5"/>
+    <limit effort="1000.0" lower="0" upper="1" velocity="0.5"/>
+  </joint>
+
+  <joint name="joint_Z" type="prismatic">
+    <parent link="link_Z"/>
     <child link="end_effector"/>
-    <origin rpy="0 0 0" xyz="0.5 0 0"/>
+    <axis xyz = "0 0 1" />
+    <origin rpy="0 0 0" xyz="0 0 -0.5"/>
+    <limit effort="1000.0" lower="0" upper="1" velocity="0.5"/>
   </joint>
 
 </robot>

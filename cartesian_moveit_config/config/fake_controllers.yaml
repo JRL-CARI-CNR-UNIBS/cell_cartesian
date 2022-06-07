@@ -2,9 +2,9 @@ controller_list:
   - name: fake_cartesian_arm_controller
     type: $(arg fake_execution_type)
     joints:
-      - from_Z_to_Y
-      - from_Y_to_fake
-      - from_fake_to_X
+      - joint_X
+      - joint_Y
+      - joint_Z
 initial:  # Define initial robot poses per group
   - group: cartesian_arm
-    pose: home_pose
+    pose: home
