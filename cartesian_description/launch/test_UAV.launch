@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<launch>
+<include file="$(find UAV_moveit_config)/launch/demo.launch"/>
+
+<node pkg="object_loader" name="context_manager_node" type="context_manager_node" respawn="true" output="screen"/>
+<rosparam command="load" file="$(find cartesian_description)/config/objects.yaml"/>
+<rosparam command="load" file="$(find cartesian_description)/config/static_scene.yaml"/>
+<node pkg="object_loader" name="scene_spawner" type="scene_spawner" output="screen"/>
+</launch>

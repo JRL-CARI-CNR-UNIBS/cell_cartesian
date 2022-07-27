@@ -3,12 +3,12 @@
 
 <xacro:include filename="$(find cartesian_description)/urdf/base_cell.xacro" />
 <xacro:base_cell
-    lb_X   = "-10.0"
+    lb_X   = "  0.0"
     ub_X   = " 10.0"
-    lb_Y   = "-10.0"
+    lb_Y   = "  0.0"
     ub_Y   = " 10.0"
     lb_Z   = "  0.0"
-    ub_Z   = " 10.0"
+    ub_Z   = " 3.0"
     radius = "0.05"
 />
 </robot>
