@@ -1,5 +1,19 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://ros.org/wiki/xacro" name="cartesian_robot" >
+  <xacro:macro name="cartesian_robot" params="
+     ub_X:=1.0
+     lb_X:=0.0
+     ub_Y:=1.0
+     lb_Y:=0.0
+     ub_Z:=1.0
+     lb_Z:=0.0
+     radius:=0.005">
+
+  <xacro:property name="velocity" value="0.5" />
+  <xacro:property name="effort" value="1000.0"/>
+  <xacro:property name="mid_point_X" value="${(ub_X-lb_X)/2.0}" />
+  <xacro:property name="mid_point_Y" value="${(ub_Y-lb_Y)/2.0}" />
+  <xacro:property name="mid_point_Z" value="${(ub_Z-lb_Z)/2.0}" />
 
   <material name="blue">
     <color rgba="0 0 1 0.5"/>
@@ -18,58 +32,10 @@
   <link name="link_Y"/>
   <link name="link_X"/>
 
-  <!-- <link name="link_Z">
-  <visual>
-    <geometry>
-      <cylinder length="1" radius="0.05"/>
-    </geometry>
-    <origin rpy="0 0 0" xyz="0 0 0"/>
-    <material name="blue"/>
-  </visual>
-  <collision>
-    <origin rpy="0 0 0" xyz="0 0 0"/>
-    <geometry>
-      <sphere radius="0.0"/>
-    </geometry>
-  </collision>
-</link> -->
-
-<!-- <link name="link_Y">
-  <visual>
-    <geometry>
-      <cylinder length="1" radius="0.05"/>
-    </geometry>
-    <origin rpy="1.570795 0 0" xyz="0 0 0"/>
-    <material name="green"/>
-  </visual>
-  <collision>
-    <origin rpy="1.570795 0 0" xyz="0 0 0"/>
-    <geometry>
-      <sphere radius="0.0"/>
-    </geometry>
-  </collision>
-</link> -->
-
-<!-- <link name="link_X">
-  <visual>
-    <geometry>
-      <cylinder length="1" radius="0.05"/>
-    </geometry>
-    <origin rpy="0 -1.570795 0" xyz="0 0 0"/>
-    <material name="red"/>
-  </visual>
-  <collision>
-    <origin rpy="0 -1.570795 0" xyz="0 0 0"/>
-    <geometry>
-      <sphere radius="0.0"/>
-    </geometry>
-  </collision>
-</link> -->
-
   <link name="end_effector">
     <visual>
       <geometry>
-        <sphere radius="0.005"/>
+        <sphere radius="${radius}"/>
       </geometry>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <material name="black"/>
@@ -77,7 +43,7 @@
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <sphere radius="0.005"/>
+        <sphere radius="${radius}"/>
       </geometry>
     </collision>
   </link>
@@ -86,24 +52,25 @@
     <parent link="link_X"/>
     <child link="link_Y"/>
     <axis xyz = "1 0 0" />
-    <origin rpy="0 0 0" xyz="-0.5 0.5 0"/>
-    <limit effort="1000.0" lower="0" upper="1" velocity="0.5"/>
+    <origin rpy="0 0 0" xyz="${-mid_point_X} ${mid_point_Y} 0"/>
+    <limit effort="${effort}" lower="${lb_X}" upper="${ub_X}" velocity="${velocity}"/>
   </joint>
 
   <joint name="joint_Y" type="prismatic">
     <parent link="link_Y"/>
     <child link="link_Z"/>
     <axis xyz = "0 1 0" />
-    <origin rpy="0 0 0" xyz="0 -0.5 0.5"/>
-    <limit effort="1000.0" lower="0" upper="1" velocity="0.5"/>
+    <origin rpy="0 0 0" xyz="0 ${-mid_point_Y} ${mid_point_Z}"/>
+    <limit effort="${effort}" lower="${lb_Y}" upper="${ub_Y}" velocity="${velocity}"/>
   </joint>
 
   <joint name="joint_Z" type="prismatic">
     <parent link="link_Z"/>
     <child link="end_effector"/>
     <axis xyz = "0 0 1" />
-    <origin rpy="0 0 0" xyz="0 0 -0.5"/>
-    <limit effort="1000.0" lower="0" upper="1" velocity="0.5"/>
+    <origin rpy="0 0 0" xyz="0 0 ${-mid_point_Z}"/>
+    <limit effort="${effort}" lower="${lb_Z}" upper="${ub_Z}" velocity="${velocity}"/>
   </joint>
 
+</xacro:macro>
 </robot>

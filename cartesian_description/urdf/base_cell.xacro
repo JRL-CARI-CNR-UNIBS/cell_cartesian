@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro" name="base_cell" >
+
+<xacro:macro name="base_cell" params="
+  ub_X:=1.0
+  lb_X:=0.0
+  ub_Y:=1.0
+  lb_Y:=0.0
+  ub_Z:=1.0
+  lb_Z:=0.0
+  radius:=0.005">
+
+<xacro:include filename="$(find cartesian_description)/urdf/cartesian_robot.urdf.xacro" />
+<xacro:cartesian_robot
+  lb_X   = "${lb_X}"
+  ub_X   = "${ub_X}"
+  lb_Y   = "${lb_Y}"
+  ub_Y   = "${ub_Y}"
+  lb_Z   = "${lb_Z}"
+  ub_Z   = "${ub_Z}"
+  radius = "${radius}"/>
+
+  <link name="world"/>
+
+  <joint name="world2cartesian" type="fixed">
+    <parent link="world"/>
+    <child link="link_X"/>
+    <origin xyz="${(ub_X-lb_X)/2} 0.0 0.0"/>
+  </joint>
+
+</xacro:macro>
+</robot>
