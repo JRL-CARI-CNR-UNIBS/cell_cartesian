@@ -1,5 +1,5 @@
-stomp/UAV_arm:
-  group_name: UAV_arm
+stomp/uav_arm:
+  group_name: uav_arm
   optimization:
     num_timesteps: 60
     num_iterations: 40

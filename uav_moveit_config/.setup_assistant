@@ -1,11 +1,11 @@
 moveit_setup_assistant_config:
   URDF:
     package: cartesian_description
-    relative_path: urdf/UAV_cell.xacro
+    relative_path: urdf/uav_cell.xacro
     xacro_args: ""
   SRDF:
     relative_path: config/UAV_cell.srdf
   CONFIG:
     author_name: Cesare Tonola
     author_email: c.tonola001@unibs.it
-    generated_timestamp: 1658914249
+    generated_timestamp: 1659000556
