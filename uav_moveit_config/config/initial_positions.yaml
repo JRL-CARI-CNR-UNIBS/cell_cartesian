@@ -1,0 +1,6 @@
+# Default initial positions for UAV_cell's ros2_control fake system
+
+initial_positions:
+  joint_X: 0
+  joint_Y: 0
+  joint_Z: 0
