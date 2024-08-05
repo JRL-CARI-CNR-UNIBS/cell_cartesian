@@ -1,0 +1,18 @@
+move_group:
+  planning_pipelines:
+    cari:
+      package_name: cartesian_moveit_config
+      logger_param_file: "config/logger_param.yaml"
+
+      group_names_map:
+        rrt: cartesian_arm
+      default_planner_config: rrt
+
+      rrt:
+        max_refine_time: 1500.0
+        utopia_tolerance: 0.05
+        extend: false
+        max_distance: 0.1
+        use_kdtree: true
+        checker_resolution: 0.01
+        parallel_checker_n_threads: 4

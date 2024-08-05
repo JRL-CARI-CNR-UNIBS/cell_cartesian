@@ -12,7 +12,7 @@
   <arg     if="$(arg info)" name="command_args" value="--debug" />
 
   <!-- move_group settings -->
-  <arg name="pipeline" default="ompl" />
+  <arg name="pipeline" default="cari" />
   <arg name="allow_trajectory_execution" default="true"/>
   <arg name="moveit_controller_manager" default="simple" />
   <arg name="fake_execution_type" default="interpolate"/>
@@ -56,13 +56,18 @@
       <arg name="pipeline" value="chomp" />
     </include>
 
+    <!-- CARI -->
+    <include file="$(dirname)/planning_pipeline.launch.xml">
+      <arg name="pipeline" value="cari" />
+    </include>
+
     <!-- Pilz Industrial Motion -->
     <include file="$(dirname)/planning_pipeline.launch.xml">
       <arg name="pipeline" value="pilz_industrial_motion_planner" />
     </include>
 
     <!-- Support custom planning pipeline -->
-    <include if="$(eval arg('pipeline') not in ['ompl', 'chomp', 'pilz_industrial_motion_planner'])"
+    <include if="$(eval arg('pipeline') not in ['ompl', 'chomp', 'pilz_industrial_motion_planner', 'cari'])"
              file="$(dirname)/planning_pipeline.launch.xml">
       <arg name="pipeline" value="$(arg pipeline)" />
     </include>
