@@ -4,12 +4,63 @@ move_group:
       package_name: cartesian_moveit_config
       logger_param_file: "config/logger_param.yaml"
 
+
       group_names_map:
         rrt: cartesian_arm
+        rrtstar: cartesian_arm
       default_planner_config: rrt
 
       rrt:
+        use_hamp: false
+        solver_plugin: graph::core::RRTPlugin
+        sampler_plugin: graph::core::InformedSamplerPlugin
+        metrics_plugin: graph::core::EuclideanMetricsPlugin
+        checker_plugin: graph::collision_check::MoveitCollisionCheckerPlugin
+        goal_cost_plugin: graph::core::NullGoalCostFunctionPlugin
+        libraries: ["libgraph_core.so","libmoveit_collision_checker.so"]
+        group_name: "cartesian_arm"
+
         max_refine_time: 1500.0
+        utopia_tolerance: 0.05
+        extend: false
+        max_distance: 0.1
+        use_kdtree: true
+        checker_resolution: 0.01
+        parallel_checker_n_threads: 4
+
+        display_bubbles: false
+        display_tree: true
+        display_tree_rate: 1.0
+
+        utopia_tolerance: 0.05
+        extend: false
+        max_distance: 0.1
+        use_kdtree: true
+        checker_resolution: 0.01
+        parallel_checker_n_threads: 4
+
+      rrtstar:
+        use_hamp: false
+        solver_plugin: graph::core::RRTStarPlugin
+        sampler_plugin: graph::core::InformedSamplerPlugin
+        metrics_plugin: graph::core::EuclideanMetricsPlugin
+        checker_plugin: graph::collision_check::MoveitCollisionCheckerPlugin
+        goal_cost_plugin: graph::core::NullGoalCostFunctionPlugin
+        libraries: ["libgraph_core.so","libmoveit_collision_checker.so"]
+        group_name: "cartesian_arm"
+
+        max_refine_time: 1500.0
+        utopia_tolerance: 0.05
+        extend: false
+        max_distance: 0.1
+        use_kdtree: true
+        checker_resolution: 0.01
+        parallel_checker_n_threads: 4
+
+        display_bubbles: false
+        display_tree: true
+        display_tree_rate: 1.0
+
         utopia_tolerance: 0.05
         extend: false
         max_distance: 0.1

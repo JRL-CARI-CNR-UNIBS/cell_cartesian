@@ -5,7 +5,7 @@
 
   <!--  Load parameters in cnr_param server-->
   <node pkg="graph_planner"
-  type="load_params.sh" name="load_params"
+  type="load_params.bash" name="load_params"
   args="cartesian_moveit_config cari_planning.yaml"
   output="screen">
   </node>
