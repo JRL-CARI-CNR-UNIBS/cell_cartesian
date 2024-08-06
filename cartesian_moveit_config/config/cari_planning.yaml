@@ -5,9 +5,10 @@ move_group:
       logger_param_file: "config/logger_param.yaml"
 
 
-      group_names_map:
-        rrt: cartesian_arm
-        rrtstar: cartesian_arm
+      planner_names:
+      - rrt
+      - rrt_star
+      - mirrt_star
       default_planner_config: rrt
 
       rrt:
@@ -30,7 +31,7 @@ move_group:
 
         display_bubbles: false
         display_tree: true
-        display_tree_rate: 1.0
+        display_tree_period: 1.0
 
         utopia_tolerance: 0.05
         extend: false
@@ -39,7 +40,9 @@ move_group:
         checker_resolution: 0.01
         parallel_checker_n_threads: 4
 
-      rrtstar:
+
+
+      rrt_star:
         use_hamp: false
         solver_plugin: graph::core::RRTStarPlugin
         sampler_plugin: graph::core::InformedSamplerPlugin
@@ -59,7 +62,7 @@ move_group:
 
         display_bubbles: false
         display_tree: true
-        display_tree_rate: 1.0
+        display_tree_period: 1.0
 
         utopia_tolerance: 0.05
         extend: false
@@ -67,3 +70,51 @@ move_group:
         use_kdtree: true
         checker_resolution: 0.01
         parallel_checker_n_threads: 4
+
+      mirrt_star:
+        use_hamp: false
+        solver_plugin: graph::mirrt_star::MIRRTStarPlugin
+        sampler_plugin: graph::core::InformedSamplerPlugin
+        metrics_plugin: graph::core::EuclideanMetricsPlugin
+        checker_plugin: graph::collision_check::MoveitCollisionCheckerPlugin
+        goal_cost_plugin: graph::core::NullGoalCostFunctionPlugin
+        libraries: ["libgraph_core.so","libmoveit_collision_checker.so",'libmirrt_star.so']
+        group_name: "cartesian_arm"
+
+        max_refine_time: 1500.0
+        utopia_tolerance: 0.05
+        extend: false
+        max_distance: 0.1
+        use_kdtree: true
+        checker_resolution: 0.01
+        parallel_checker_n_threads: 4
+
+        display_bubbles: false
+        display_tree: true
+        display_tree_period: 1.0
+
+        utopia_tolerance: 0.05
+        extend: false
+        max_distance: 0.1
+        use_kdtree: true
+        checker_resolution: 0.01
+        parallel_checker_n_threads: 4
+
+        rewire_radius: 0.2
+        mixed_strategy: true
+        bidirectional: true
+        k_nearest: false
+        local_bias: 0.3
+        tube_radius: 0.3
+        forgetting_factor: 0.99
+
+        policy_type: MultiArmedBandit
+        policy_name: eGreedy
+        reward_fcn: RelativeImprovement
+        warm_start_reward: false
+        epsilon_coef: 0.2
+        epsilon_exp: 1.0
+        reward_gain: 1.0
+        egreedy_forgetting_factor: 0.0
+        egreedy_reward_forgetting_factor: 0.0
+      
