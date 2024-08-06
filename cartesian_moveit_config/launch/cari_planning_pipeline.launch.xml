@@ -1,12 +1,14 @@
 <launch>
 
   <!-- CARI Motion planning Plugin for MoveIt! -->
+
+  <arg name="package_name" value="YOUR_PACKAGE_moveit_config" />
   <arg name="planning_plugin" value="cari/planner" />
 
   <!--  Load parameters in cnr_param server-->
   <node pkg="graph_planner"
   type="load_params.bash" name="load_params"
-  args="cartesian_moveit_config cari_planning.yaml"
+  args="${arg package_name} cari_planning.yaml"
   output="screen">
   </node>
 
@@ -31,6 +33,6 @@
   <!-- Add MoveGroup capabilities specific to this pipeline -->
   <!-- <param name="capabilities" value="" /> -->
 
-  <rosparam command="load" file="$(find cartesian_moveit_config)/config/cari_planning.yaml"/>
+  <rosparam command="load" file="$(find ${arg package_name})/config/cari_planning.yaml"/>
 
 </launch>

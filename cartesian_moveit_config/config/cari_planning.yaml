@@ -33,12 +33,6 @@ move_group:
         display_tree: true
         display_tree_period: 1.0
 
-        utopia_tolerance: 0.05
-        extend: false
-        max_distance: 0.1
-        use_kdtree: true
-        checker_resolution: 0.01
-        parallel_checker_n_threads: 4
 
 
 
@@ -64,12 +58,6 @@ move_group:
         display_tree: true
         display_tree_period: 1.0
 
-        utopia_tolerance: 0.05
-        extend: false
-        max_distance: 0.1
-        use_kdtree: true
-        checker_resolution: 0.01
-        parallel_checker_n_threads: 4
 
       mirrt_star:
         use_hamp: false
@@ -117,4 +105,3 @@ move_group:
         reward_gain: 1.0
         egreedy_forgetting_factor: 0.0
         egreedy_reward_forgetting_factor: 0.0
-      

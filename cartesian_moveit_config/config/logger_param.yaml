@@ -1,4 +1,4 @@
 appenders: ["file", "screen"]
-levels: ["debug", "debug"]
+levels: ["debug", "info"]
 pattern_layout: '[%M:%L]: %m%n'
 file_name: "cartesian_moveit_config"
