@@ -1,0 +1,27 @@
+moveit_setup_assistant_config:
+  urdf:
+    package: planar_robot_description
+    relative_path: urdf/planar_robot.xacro
+  srdf:
+    relative_path: config/cartesian_cell.srdf
+  package_settings:
+    author_name: marco faroni
+    author_email: marco.faroni@polimi.it
+    generated_timestamp: 1748270387
+  control_xacro:
+    command:
+      - position
+      - velocity
+    state:
+      - position
+      - velocity
+  modified_urdf:
+    xacros:
+      - control_xacro
+  control_xacro:
+    command:
+      - position
+      - velocity
+    state:
+      - position
+      - velocity

@@ -1,0 +1,12 @@
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+  <xacro:macro name="add_gazebo_addons">
+
+    <gazebo>
+        <plugin name="ign_ros2_control::IgnitionROS2ControlPlugin"
+                filename="ign_ros2_control-system">
+                <parameters>$(find planar_robot_bringup)/config/ros2_controllers.yaml</parameters>
+        </plugin>
+    </gazebo>
+
+  </xacro:macro>
+</robot>

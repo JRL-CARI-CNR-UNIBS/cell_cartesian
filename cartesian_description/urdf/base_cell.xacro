@@ -2,6 +2,7 @@
 <robot xmlns:xacro="http://ros.org/wiki/xacro" name="base_cell" >
 
 <xacro:macro name="base_cell" params="
+  dim:=3
   ub_X:=1.0
   lb_X:=0.0
   ub_Y:=1.0
@@ -10,15 +11,28 @@
   lb_Z:=0.0
   radius:=0.005">
 
-<xacro:include filename="$(find cartesian_description)/urdf/cartesian_robot.urdf.xacro" />
-<xacro:cartesian_robot
-  lb_X   = "${lb_X}"
-  ub_X   = "${ub_X}"
-  lb_Y   = "${lb_Y}"
-  ub_Y   = "${ub_Y}"
-  lb_Z   = "${lb_Z}"
-  ub_Z   = "${ub_Z}"
-  radius = "${radius}"/>
+
+  <xacro:if value="${dim == 2}">
+    <xacro:include filename="$(find cartesian_description)/urdf/planar_robot.urdf.xacro" />
+    <xacro:cartesian_robot
+      lb_X   = "${lb_X}"
+      ub_X   = "${ub_X}"
+      lb_Y   = "${lb_Y}"
+      ub_Y   = "${ub_Y}"
+      radius = "${radius}"/>
+  </xacro:if>
+
+  <xacro:if value="${dim == 3}">
+    <xacro:include filename="$(find cartesian_description)/urdf/cartesian_robot.urdf.xacro" />
+    <xacro:cartesian_robot
+      lb_X   = "${lb_X}"
+      ub_X   = "${ub_X}"
+      lb_Y   = "${lb_Y}"
+      ub_Y   = "${ub_Y}"
+      lb_Z   = "${lb_Z}"
+      ub_Z   = "${ub_Z}"
+      radius = "${radius}"/>
+  </xacro:if>
 
   <link name="world"/>
 

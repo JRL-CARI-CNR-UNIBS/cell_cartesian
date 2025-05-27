@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro" name="planar_robot" >
+
+  <xacro:arg name="use_gazebo" default="false"/>
+  <xacro:property name="use_gazebo" value="$(arg use_gazebo)"/>
+
+  <xacro:include filename="$(find cartesian_description)/urdf/base_cell.xacro" />
+  <xacro:base_cell
+    dim    = "2"
+    lb_X   = "0.0"
+    ub_X   = "1.0"
+    lb_Y   = "0.0"
+    ub_Y   = "1.0"
+    radius = "0.025"
+  />
+
+  <xacro:include filename="$(find planar_robot_description)/urdf/planar_robot.ros2_control.xacro" />
+  <xacro:planar_robot_ros2_control
+    name="PlanarRobotInterfaceHardware"
+    use_gazebo="${use_gazebo}"/>
+
+  <xacro:if value="${use_gazebo}">
+    <xacro:include filename="$(find planar_robot_description)/urdf/gazebo_integration.xacro"/>
+    <xacro:add_gazebo_addons/>
+  </xacro:if>
+
+</robot>

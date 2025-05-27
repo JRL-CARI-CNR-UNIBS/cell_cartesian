@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro" name="cartesian_robot" >
+       
+  <xacro:macro name="cartesian_robot" params="
+     ub_X:=1.0
+     lb_X:=0.0
+     ub_Y:=1.0
+     lb_Y:=0.0
+     radius:=0.005">
+
+  <xacro:property name="velocity" value="0.5" />
+  <xacro:property name="effort" value="1000.0"/>
+  <xacro:property name="mid_point_X" value="${(ub_X-lb_X)/2.0}" />
+  <xacro:property name="mid_point_Y" value="${(ub_Y-lb_Y)/2.0}" />
+
+  <xacro:include filename="$(find cartesian_description)/urdf/default_inertial_macro.xacro"/>
+
+
+  <material name="blue">
+    <color rgba="0 0 1 0.5"/>
+  </material>
+  <material name="green">
+    <color rgba="0 1 0 0.5"/>
+  </material>
+  <material name="red">
+    <color rgba="1 0 0 0.5"/>
+  </material>
+  <material name="black">
+    <color rgba="0 0 0 1"/>
+  </material>
+
+  <link name="link_Y">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="0.000001"/>
+      <inertia
+     ixx="0.00001" ixy="0.0" ixz="0.0" iyy="0.00001" iyz="0.0" izz="0.00001"/>
+    </inertial>
+  </link>
+
+  <link name="link_X">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="0.000001"/>
+      <inertia
+     ixx="0.00001" ixy="0.0" ixz="0.0" iyy="0.00001" iyz="0.0" izz="0.00001"/>
+    </inertial>
+  </link>
+
+  <link name="end_effector">
+    <xacro:default_inertial/>
+    <visual>
+      <geometry>
+        <sphere radius="${radius}"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <material name="black"/>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <sphere radius="${radius}"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="joint_X" type="prismatic">
+    <parent link="link_X"/>
+    <child link="link_Y"/>
+    <axis xyz = "1 0 0" />
+    <origin rpy="0 0 0" xyz="${-mid_point_X} ${mid_point_Y} 0"/>
+    <limit effort="${effort}" lower="${lb_X}" upper="${ub_X}" velocity="${velocity}"/>
+  </joint>
+
+  <joint name="joint_Y" type="prismatic">
+    <parent link="link_Y"/>
+    <child link="end_effector"/>
+    <axis xyz = "0 1 0" />
+    <origin rpy="0 0 0" xyz="0.0 ${-mid_point_Y} 0.0"/>
+    <limit effort="${effort}" lower="${lb_Y}" upper="${ub_Y}" velocity="${velocity}"/>
+  </joint>
+
+</xacro:macro>
+</robot>
