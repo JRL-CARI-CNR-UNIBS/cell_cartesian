@@ -24,4 +24,8 @@
     <xacro:add_gazebo_addons/>
   </xacro:if>
 
+
+  <xacro:include filename="$(find planar_robot_description)/urdf/scenarios/maze_1.xacro" />
+
+
 </robot>

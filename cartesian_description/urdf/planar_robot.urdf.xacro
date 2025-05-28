@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
-<robot xmlns:xacro="http://ros.org/wiki/xacro" name="cartesian_robot" >
+<robot xmlns:xacro="http://ros.org/wiki/xacro" name="planar_robot" >
        
-  <xacro:macro name="cartesian_robot" params="
+  <xacro:macro name="planar_robot" params="
      ub_X:=1.0
      lb_X:=0.0
      ub_Y:=1.0

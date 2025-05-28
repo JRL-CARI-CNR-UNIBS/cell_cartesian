@@ -32,7 +32,7 @@ def generate_launch_description():
     moveit_config_file='cartesian_cell.srdf'
     moveit_controllers_file='moveit_controllers.yaml'
     controllers_file='ros2_controllers.yaml'
-    initial_joint_controller='planar_robot_controller'
+    initial_joint_controller='faulty_velocity_controller'
     runtime_config_package='planar_robot_bringup'
     launch_rviz='false'
 

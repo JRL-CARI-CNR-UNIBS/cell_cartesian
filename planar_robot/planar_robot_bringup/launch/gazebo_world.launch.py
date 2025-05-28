@@ -17,11 +17,8 @@ def generate_launch_description():
         'models', 'world', 'minimal_world.sdf'
     )
 
-    #world_path_hardcoded = "/home/galileo/projects/merlin2_ws/src/cell_cartesian/planar_robot/planar_robot_description/models/world/minimal_world.sdf"
-
-
     gazebo = ExecuteProcess(
-        cmd=["ign", "gazebo", "-r", "-v", "4", world_path   ], #  
+        cmd=["ign", "gazebo", "-r", "-v", "4", world_path],
         output="screen"
     )
 

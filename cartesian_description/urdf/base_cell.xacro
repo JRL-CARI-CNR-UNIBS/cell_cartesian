@@ -14,7 +14,7 @@
 
   <xacro:if value="${dim == 2}">
     <xacro:include filename="$(find cartesian_description)/urdf/planar_robot.urdf.xacro" />
-    <xacro:cartesian_robot
+    <xacro:planar_robot
       lb_X   = "${lb_X}"
       ub_X   = "${ub_X}"
       lb_Y   = "${lb_Y}"
