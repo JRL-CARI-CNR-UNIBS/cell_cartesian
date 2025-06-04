@@ -22,6 +22,9 @@
   <xacro:if value="${use_gazebo}">
     <xacro:include filename="$(find planar_robot_description)/urdf/gazebo_integration.xacro"/>
     <xacro:add_gazebo_addons/>
+    <gazebo>
+      <self_collide>true</self_collide>
+    </gazebo>
   </xacro:if>
 
 

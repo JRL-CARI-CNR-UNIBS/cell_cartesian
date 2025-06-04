@@ -19,11 +19,28 @@ planar_robot_controller:
       - joint_X
       - joint_Y
     command_interfaces:
-      - position
-      #- velocity
+      #- position
+      - velocity
+      #- effort
     state_interfaces:
       - position
-      - velocity      
+      - velocity
+    constraints:
+      stopped_velocity_tolerance: 0.0
+      goal_time: 0.0
+    open_loop_control: false  
+    gains:
+      joint_X:
+        ff_velocity_scale: 1.0
+        p: 100.0
+        d: 0.0
+        i: 0.0
+      joint_Y:
+        ff_velocity_scale: 1.0
+        p: 100.0
+        d: 0.0
+        i: 0.0
+    
 
 faulty_velocity_controller: 
   ros__parameters:
@@ -39,8 +56,15 @@ faulty_velocity_controller:
     action_monitor_rate: 20.0
     constraints:
       stopped_velocity_tolerance: 0.0
-      goal_time: 0.0
-    open_loop_control: false
+      goal_time: 1.0
+      joint_X:
+        goal: 0.1
+        trajectory: 0.1
+      joint_Y:
+        goal: 0.1
+        trajectory: 0.1
+
+    open_loop_control: true
     # gains are used only if open_loop_control is set to false
     gains:
       joint_X:
@@ -53,11 +77,11 @@ faulty_velocity_controller:
         p: 0.1
         d: 0.0
         i: 0.0
-    drift: [0.1, 0.2]
+    drift: [-0.3, 0.3]
     clamp:
         position:
-            ub: [0.5, 0.5]
+            ub: [1.0, 1.0]
             lb: [0.0, 0.0]
         velocity:
-            ub: [-10.0, -10.0]
+            ub: [10.0, 10.0]
             lb: [-10.0, -10.0]
