@@ -10,7 +10,7 @@ from launch.substitutions import (
 from launch_ros.actions import Node
 from launch_ros.descriptions import ParameterValue
 from launch_ros.substitutions import FindPackageShare
-
+from launch.actions import LogInfo
 
 def generate_launch_description():
     declared_arguments = []
@@ -80,6 +80,11 @@ def generate_launch_description():
             "launch_rviz", default_value="true", description="Launch RViz?"
         )
     )
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "scenario", default_value="maze_1", description="scenario"
+        )
+    )
 
     # Initialize Arguments
     runtime_config_package = LaunchConfiguration("runtime_config_package")
@@ -91,6 +96,7 @@ def generate_launch_description():
     use_gazebo = LaunchConfiguration("use_gazebo")
     initial_joint_controller = LaunchConfiguration("initial_joint_controller")
     launch_rviz = LaunchConfiguration("launch_rviz")
+    scenario = LaunchConfiguration("scenario")
 
     robot_description_content = Command(
         [
@@ -103,18 +109,22 @@ def generate_launch_description():
             "use_gazebo:=",
             use_gazebo,
             " ",
+            "scenario:=",
+            scenario,
+            " ",
         ]
     )
     robot_description = {
         "robot_description": ParameterValue(robot_description_content, value_type=str)
     }
 
+
     robot_controllers = PathJoinSubstitution(
         [FindPackageShare(runtime_config_package), "config", controllers_file]
     )
 
     rviz_config_file = PathJoinSubstitution(
-        [FindPackageShare(moveit_config_package), "rviz", "moveit.rviz"]
+        [FindPackageShare(moveit_config_package), "config", "moveit.rviz"]
     )
 
     control_node = Node(
@@ -165,4 +175,4 @@ def generate_launch_description():
         initial_joint_controller_spawner,
     ]
 
-    return LaunchDescription(declared_arguments + nodes_to_start)
+    return LaunchDescription(declared_arguments + nodes_to_start )

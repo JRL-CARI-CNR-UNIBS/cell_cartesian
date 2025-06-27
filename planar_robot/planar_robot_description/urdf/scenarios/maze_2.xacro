@@ -117,10 +117,14 @@
   <xacro:maze_wall name="boundary_left"   length="1.0" x="-0.5" y="0.0" yaw="1.5708"/>
   <xacro:maze_wall name="boundary_right"  length="1.0" x="0.5" y="0.0" yaw="1.5708"/>
 
-  <!-- === Dour Box Obstacles === -->
-  <xacro:maze_box name="box_1" x="-0.2" y="0.2" size="0.2"/>
-  <xacro:maze_box name="box_2" x="0.2" y="0.2" size="0.2"/>
-  <xacro:maze_box name="box_3" x="-0.2" y="-0.2" size="0.2"/>
-  <xacro:maze_box name="box_4" x="0.2" y="-0.2" size="0.2"/>
-
+  <!-- === Eight Box Obstacles === -->
+  <xacro:maze_box name="box_1" x="-0.25" y="-0.25" size="0.15"/>
+  <xacro:maze_box name="box_2" x="-0.25" y="0.0" size="0.15"/>
+  <xacro:maze_box name="box_3" x="-0.25" y="0.25" size="0.15"/>
+  <xacro:maze_box name="box_4" x="0.0" y="-0.25" size="0.15"/>
+  <xacro:maze_box name="box_5" x="0.0" y="0.0" size="0.15"/>
+  <xacro:maze_box name="box_6" x="0.0" y="0.25" size="0.15"/>
+  <xacro:maze_box name="box_7" x="0.25" y="0.0" size="0.15"/>
+  <xacro:maze_box name="box_8" x="0.25" y="0.25" size="0.15"/>
+  
 </robot>

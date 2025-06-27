@@ -1,7 +1,7 @@
 moveit_setup_assistant_config:
   urdf:
     package: planar_robot_description
-    relative_path: urdf/planar_robot.xacro
+    relative_path: urdf/planar_robot_no.xacro
   srdf:
     relative_path: config/cartesian_cell.srdf
   package_settings:

@@ -4,6 +4,10 @@
   <xacro:arg name="use_gazebo" default="false"/>
   <xacro:property name="use_gazebo" value="$(arg use_gazebo)"/>
 
+  <xacro:arg name="scenario" default="maze_2"/>
+  <xacro:property name="scenario" value="$(arg scenario)"/>
+
+
   <xacro:include filename="$(find cartesian_description)/urdf/base_cell.xacro" />
   <xacro:base_cell
     dim    = "2"
@@ -28,7 +32,7 @@
   </xacro:if>
 
 
-  <xacro:include filename="$(find planar_robot_description)/urdf/scenarios/maze_1.xacro" />
+  <xacro:include filename="$(find planar_robot_description)/urdf/scenarios/${scenario}.xacro" />
 
 
 </robot>

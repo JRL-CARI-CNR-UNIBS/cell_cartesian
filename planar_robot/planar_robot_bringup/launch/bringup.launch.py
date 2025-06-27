@@ -25,7 +25,17 @@ def generate_launch_description():
         )
     )
 
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "scenario",
+            default_value="maze_1",
+            description="Obstacle scenario to be loaded.",
+        )
+    )
+
     use_gazebo = LaunchConfiguration("use_gazebo")
+    scenario = LaunchConfiguration("scenario")
+
     description_package='planar_robot_description'
     description_file='planar_robot.xacro'
     moveit_config_package='planar_robot_moveit_config'
@@ -35,6 +45,7 @@ def generate_launch_description():
     initial_joint_controller='faulty_velocity_controller' # planar_robot_controller faulty_velocity_controller
     runtime_config_package='planar_robot_bringup'
     launch_rviz='false'
+
 
     control_launcher = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([os.path.join(get_package_share_directory('planar_robot_bringup'),'launch', 'control.launch.py')]),
@@ -46,7 +57,8 @@ def generate_launch_description():
             'moveit_config_package': moveit_config_package,
             'runtime_config_package': runtime_config_package,
             'controllers_file': controllers_file,
-            'initial_joint_controller': initial_joint_controller
+            'initial_joint_controller': initial_joint_controller,
+            'scenario': scenario
         }.items(),
     )
 

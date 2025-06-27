@@ -26,8 +26,6 @@ def load_yaml(package_name, file_path):
 def launch_setup(context, *args, **kwargs):
     # Command-line arguments
     runtime_config_package = LaunchConfiguration("runtime_config_package")
-    robot_xacro_file = LaunchConfiguration("robot_xacro_file")
-    support_package = LaunchConfiguration("support_package")
     moveit_config_package = LaunchConfiguration("moveit_config_package")
     moveit_controllers_file = LaunchConfiguration("moveit_controllers_file")
     moveit_config_file = LaunchConfiguration("moveit_config_file")
@@ -67,7 +65,7 @@ def launch_setup(context, *args, **kwargs):
                 "config",
                 f"{moveit_controllers_file.perform(context)}",
             ),
-            moveit_manage_controllers=False,
+            moveit_manage_controllers=True,
         )
         .planning_scene_monitor(
             publish_planning_scene=True,

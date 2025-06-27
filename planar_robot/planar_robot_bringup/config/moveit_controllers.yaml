@@ -14,7 +14,7 @@ moveit_simple_controller_manager:
     - faulty_velocity_controller
 
   planar_robot_controller:
-    default: false
+    #default: false
     action_ns: follow_joint_trajectory
     type: FollowJointTrajectory
     joints:
@@ -22,7 +22,7 @@ moveit_simple_controller_manager:
       - joint_Y
 
   faulty_velocity_controller:
-    default: true
+    #default: true
     action_ns: follow_joint_trajectory
     type: FollowJointTrajectory
     joints:

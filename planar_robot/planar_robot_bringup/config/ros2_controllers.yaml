@@ -64,7 +64,7 @@ faulty_velocity_controller:
         goal: 0.1
         trajectory: 0.1
 
-    open_loop_control: true
+    open_loop_control: false
     # gains are used only if open_loop_control is set to false
     gains:
       joint_X:
@@ -77,7 +77,7 @@ faulty_velocity_controller:
         p: 0.1
         d: 0.0
         i: 0.0
-    drift: [-0.3, 0.3]
+    default_drift: [0.2, 0.2]
     clamp:
         position:
             ub: [1.0, 1.0]

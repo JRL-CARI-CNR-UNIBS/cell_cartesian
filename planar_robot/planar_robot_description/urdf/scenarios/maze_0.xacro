@@ -8,8 +8,6 @@
   <xacro:property name="pillar_height" value="0.1"/>
   <xacro:property name="x_offset" value="0.5"/>
   <xacro:property name="y_offset" value="0.5"/>
-  <xacro:property name="box_height" value="0.1"/>
-
 
   <link name="maze_base_link"/>
   <joint name="maze_world_joint" type="fixed">
@@ -80,47 +78,26 @@
     </joint>
   </xacro:macro>
 
-  <!-- === Parameterized Box Obstacle Macro === -->
-  <xacro:macro name="maze_box" params="name x y size">
-    <link name="${name}_link">
-      <visual>
-        <origin xyz="0 0 ${box_height / 2}" rpy="0 0 0"/>
-        <geometry>
-          <box size="${size} ${size} ${box_height}"/>
-        </geometry>
-        <material name="red">
-          <color rgba="0.8 0.2 0.2 1.0"/>
-        </material>
-      </visual>
-      <collision>
-        <origin xyz="0 0 ${box_height / 2}" rpy="0 0 0"/>
-        <geometry>
-          <box size="${size} ${size} ${box_height}"/>
-        </geometry>
-      </collision>
-      <inertial>
-        <mass value="1000.0"/>
-        <origin xyz="0 0 ${size / 2}" rpy="0 0 0"/>
-        <inertia ixx="1" ixy="0" ixz="0" iyy="1" iyz="0" izz="1"/>
-      </inertial>
-    </link>
-    <joint name="${name}_joint" type="fixed">
-      <parent link="maze_base_link"/>
-      <child link="${name}_link"/>
-      <origin xyz="${x} ${y} 0" rpy="0 0 0"/>
-    </joint>
-  </xacro:macro>
-
   <!-- === Outer square (1x1m boundary) === -->
   <xacro:maze_wall name="boundary_top"    length="1.0" x="0.0" y="0.5" yaw="0.0"/>
   <xacro:maze_wall name="boundary_bottom" length="1.0" x="0.0" y="-0.5" yaw="0.0"/>
   <xacro:maze_wall name="boundary_left"   length="1.0" x="-0.5" y="0.0" yaw="1.5708"/>
   <xacro:maze_wall name="boundary_right"  length="1.0" x="0.5" y="0.0" yaw="1.5708"/>
 
-  <!-- === Dour Box Obstacles === -->
-  <xacro:maze_box name="box_1" x="-0.2" y="0.2" size="0.2"/>
-  <xacro:maze_box name="box_2" x="0.2" y="0.2" size="0.2"/>
-  <xacro:maze_box name="box_3" x="-0.2" y="-0.2" size="0.2"/>
-  <xacro:maze_box name="box_4" x="0.2" y="-0.2" size="0.2"/>
+  <!-- === Ten inner walls === -->
+  <xacro:maze_wall name="wall_1" length="0.3" x="-0.3" y="0.3" yaw="0.0"/>
+  <xacro:maze_wall name="wall_2" length="0.2" x="-0.1" y="0.4" yaw="1.5708"/>
+  <xacro:maze_wall name="wall_3" length="0.4" x="0.2"  y="0.3" yaw="0.0"/>
+  <xacro:maze_wall name="wall_4" length="0.3" x="0.0"  y="0.0" yaw="1.5708"/>
+  <xacro:maze_wall name="wall_5" length="0.2" x="0.2"  y="-0.1" yaw="0.0"/>
+  <xacro:maze_wall name="wall_6" length="0.4" x="-0.3" y="-0.2" yaw="0.0"/>
+  <xacro:maze_wall name="wall_7" length="0.3" x="0.3"  y="-0.3" yaw="1.5708"/>
+  <xacro:maze_wall name="wall_8" length="0.2" x="-0.4" y="0.1" yaw="1.5708"/>
+  <xacro:maze_wall name="wall_9" length="0.2" x="0.4"  y="0.1" yaw="1.5708"/>
+  <xacro:maze_wall name="wall_10" length="0.4" x="0.0" y="-0.4" yaw="0.0"/>
+
+  <!-- === Pillars === -->
+  <xacro:maze_pillar name="pillar_1" x="-0.25" y="-0.25"/>
+  <xacro:maze_pillar name="pillar_2" x="0.25" y="0.25"/>
 
 </robot>
